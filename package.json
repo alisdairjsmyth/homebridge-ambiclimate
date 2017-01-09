@@ -1,0 +1,29 @@
+{
+  "name": "homebridge-ambiclimate",
+  "version": "0.0.1",
+  "description": "Ambi Climate plugin for Homebridge",
+  "author": {
+    "name": "Alisdair Smyth",
+    "email": "alisdair.smyth@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alisdairjsmyth/homebridge-ambiclimate.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin",
+    "ambi+climate",
+    "thermostat",
+    "air+conditioner"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "node-ambiclimate": "0.2.x"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/alisdairjsmyth/homebridge-ambiclimate#readme",
+  "bugs": {
+    "url": "https://github.com/alisdairjsmyth/homebridge-ambiclimate/issues"
+  }
+}
