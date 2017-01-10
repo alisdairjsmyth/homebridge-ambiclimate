@@ -1,7 +1,7 @@
 # homebridge-ambiclimate
 [![npm version](https://badge.fury.io/js/homebridge-ambiclimate.svg)](https://badge.fury.io/js/homebridge-ambiclimate)
 
-Ambi Climate plugin for Homebridge.  This plugin presently supports:
+[Ambi Climate](https://www.ambiclimate.com/) plugin for [homebridge](https://www.npmjs.com/package/homebridge).  This plugin presently supports:
 * Current Temperature
 * Current Relative Humidity
 
@@ -9,9 +9,9 @@ Ambi Climate plugin for Homebridge.  This plugin presently supports:
 
     npm install -g homebridge-ambiclimate
 
-This plugin augments a pre-existing implementation of homebridge.  Refer to homebridge for installation instructions.
+This plugin augments a pre-existing implementation of [homebridge](https://www.npmjs.com/package/homebridge).  Refer to [nfarina/homebridge](https://www.npmjs.com/package/homebridge) for installation instructions.
 
-A bearer token is mandatory to use the Ambi Climate API.  A new token can be obtained in the Ambi Dev Portal by following the steps on the Quick Start page.
+A bearer token is mandatory to use the Ambi Climate API.  A new token can be obtained in the [Ambi Dev Portal](https://api.ambiclimate.com/) by following the steps on the Quick Start page.
 
 Update your homebridge configuration file (as below).
 
