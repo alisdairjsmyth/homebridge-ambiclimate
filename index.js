@@ -41,7 +41,7 @@ AmbiClimate.prototype = {
             }
         });
     },
-    getCurrentRelativeHumidity = function(callback) {
+    getCurrentRelativeHumidity: function(callback) {
         var accessory = this;
 
         var ac = require('node-ambiclimate');
