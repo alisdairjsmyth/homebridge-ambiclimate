@@ -1,6 +1,6 @@
 {
   "name": "homebridge-ambiclimate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Ambi Climate plugin for Homebridge",
   "author": {
     "name": "Alisdair Smyth",
