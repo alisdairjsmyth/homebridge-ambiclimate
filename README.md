@@ -19,7 +19,7 @@ Update your homebridge configuration file (as below).
 
     "accessories" : [
         {
-            "accessory": "Ambi Climate",
+            "accessory": "AmbiClimate",
             "name": "<Name for Accessory>",
             "roomName": "<Name of Ambi Climate Device>",
             "locationName": "<Name of Ambi Climate Location>"
@@ -28,7 +28,7 @@ Update your homebridge configuration file (as below).
     ]
 
 Separate homebridge accessories can be defined for each Ambi Climate device to be controlled.  
-* `accessory`: Must be "Ambi Climate"
+* `accessory`: Must be "AmbiClimate"
 * `name`: Can be anything, this will be the name of the Accessory within HomeKit Apps
 * `room_name`: Must match the value within the Ambi Climate App
 * `location_name`: Must match the value within the Ambi Climate App
