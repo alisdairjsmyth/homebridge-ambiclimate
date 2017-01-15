@@ -33,7 +33,8 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_temperature(settings, function (err, data) {
-            callback(null, data.value);
+            log.debug("Returned temperature: "+ data);
+            callback(err, data.value);
         });
     },
     getCurrentRelativeHumidity: function(callback) {
@@ -50,7 +51,8 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_humidity(settings, function (err, data) {
-            callback(null, data.value);
+            log.debug("Returned temperature: "+ data);
+            callback(err, data.value);
         });
     },
     //
