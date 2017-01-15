@@ -33,7 +33,6 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_temperature(settings, function (err, data) {
-            this.log("Returned temperature: "+ data);
             callback(err, data.value);
         });
     },
@@ -51,7 +50,6 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_humidity(settings, function (err, data) {
-            this.log("Returned humidity: "+ data);
             callback(err, data.value);
         });
     },
@@ -62,6 +60,7 @@ AmbiClimate.prototype = {
         this.temperatureService.getCharacteristic(Characteristic.CurrentTemperature)
             .on('get', function(callback) {
                 this.getCurrentTemperature(function(error,data){
+                    this.log("Returned temperature: "+ data)
                     callback(error, data);
                 }.bind(this));
             }.bind(this));
@@ -69,6 +68,7 @@ AmbiClimate.prototype = {
         this.humidityService.getCharacteristic(Characteristic.CurrentRelativeHumidity)
             .on('get', function(callback) {
                 this.getCurrentRelativeHumidity(function(error,data){
+                    this.log("Returned humidity: "+ data)
                     callback(error, data);
                 }.bind(this));
             }.bind(this));
