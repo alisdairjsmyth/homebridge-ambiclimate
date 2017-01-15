@@ -33,7 +33,7 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_temperature(settings, function (err, data) {
-            log.debug("Returned temperature: "+ data);
+            this.log("Returned temperature: "+ data);
             callback(err, data.value);
         });
     },
@@ -51,7 +51,7 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_humidity(settings, function (err, data) {
-            log.debug("Returned temperature: "+ data);
+            this.log("Returned humidity: "+ data);
             callback(err, data.value);
         });
     },
