@@ -33,12 +33,7 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_temperature(settings, function (err, data) {
-            if (!err) {
-                callback(null, data.value);
-            }
-            else {
-                callback(err);
-            }
+            callback(null, data.value);
         });
     },
     getCurrentRelativeHumidity: function(callback) {
@@ -55,12 +50,7 @@ AmbiClimate.prototype = {
         };
 
         client.sensor_humidity(settings, function (err, data) {
-            if (!err) {
-                callback(null, data.value);
-            }
-            else {
-                callback(err);
-            }
+            callback(null, data.value);
         });
     },
     //
@@ -68,10 +58,18 @@ AmbiClimate.prototype = {
     //
     getServices: function () {
         this.temperatureService.getCharacteristic(Characteristic.CurrentTemperature)
-            .on('get', this.getCurrentTemperature.bind(this));
+            .on('get', function(callback) {
+                this.getCurrentTemperature(function(error,data){
+                    callback(error, data);
+                }.bind(this));
+            }.bind(this));
 
         this.humidityService.getCharacteristic(Characteristic.CurrentRelativeHumidity)
-            .on('get', this.getCurrentRelativeHumidity.bind(this));
+            .on('get', function(callback) {
+                this.getCurrentRelativeHumidity(function(error,data){
+                    callback(error, data);
+                }.bind(this));
+            }.bind(this));
 
 // this.thermostatService.getCharacteristic(Characteristic.CurrentHeatingCoolingState)
 
