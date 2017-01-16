@@ -2,17 +2,17 @@ var ambi = require('node-ambiclimate');
 var Service, Characteristic;
 
 module.exports = function(homebridge) {
-    Service = homebridge.hap.Service;
+    Service        = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
     homebridge.registerAccessory("homebridge-ambiclimate", "AmbiClimate", AmbiClimate);
 }
 
 function AmbiClimate(log, config) {
-    this.log          = log;
-    this.name         = config.name;
-    this.roomName     = config.roomName;
-    this.locationName = config.locationName;
-    this.bearerToken  = config.bearerToken;
+    this.log                = log;
+    this.name               = config.name;
+    this.roomName           = config.roomName;
+    this.locationName       = config.locationName;
+    this.bearerToken        = config.bearerToken;
     this.temperatureService = new Service.TemperatureSensor(this.name);
     this.humidityService    = new Service.HumiditySensor(this.name);
     this.informationService = new Service.AccessoryInformation();
@@ -53,6 +53,7 @@ AmbiClimate.prototype = {
             callback(err, data[0].value);
         });
     },
+
     //
     // Services
     //
@@ -72,14 +73,6 @@ AmbiClimate.prototype = {
                     callback(error, data);
                 }.bind(this));
             }.bind(this));
-
-// this.thermostatService.getCharacteristic(Characteristic.CurrentHeatingCoolingState)
-
-// this.thermostatService.getCharacteristic(Characteristic.TargetHeatingCoolingState)
-
-// this.thermostatService.getCharacteristic(Characteristic.TargetTemperature)
-
-// this.thermostatService.getCharacteristic(Characteristic.TemperatureDisplayUnits)
 
  		this.informationService
 			.setCharacteristic(Characteristic.Manufacturer, "Ambi Labs")
