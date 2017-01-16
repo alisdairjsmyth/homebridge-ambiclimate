@@ -22,7 +22,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "node-ambiclimate": "0.0.x"
+    "node-ambiclimate": "1.0.x"
   },
   "devDependencies": {},
   "homepage": "https://github.com/alisdairjsmyth/homebridge-ambiclimate#readme",
