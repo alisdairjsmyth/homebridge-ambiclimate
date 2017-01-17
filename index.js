@@ -86,7 +86,7 @@ AmbiClimate.prototype = {
                 callback(err);
             });
         }
-    }
+    },
 
     //
     // Services
