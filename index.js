@@ -125,6 +125,6 @@ AmbiClimate.prototype = {
 			.setCharacteristic(Characteristic.Model, "Ambi Climate")
 			.setCharacteristic(Characteristic.SerialNumber, " ");
 
-        return [this.temperatureService,this.humidityService,this.informationService];
+        return [this.temperatureService,this.humidityService,this.switchService,this.informationService];
     }
 }
