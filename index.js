@@ -8,12 +8,11 @@ module.exports = function(homebridge) {
 }
 
 function AmbiClimate(log, config) {
-    this.log           = log;
-    this.name          = config.name;
-    this.settings      = {
-        room_name: config.roomName,
-        location_name: config.locationName
-    };
+    this.log                    = log;
+    this.name                   = config.name;
+    this.settings               = {};
+    this.settings.room_name     = config.roomName,
+    this.settings.location_name = config.locationName;
 
     this.client = new ambi(config.clientId, config.clientSecret, config.username, config.password);
 
@@ -35,14 +34,14 @@ AmbiClimate.prototype = {
         var accessory = this;
 
         accessory.client.sensor_temperature(accessory.settings, function (err, data) {
-            callback(err, data[0].value);
+            (err) ? callback(err, data) : callback(err, data[0].value);
         });
     },
     getCurrentRelativeHumidity: function(callback) {
         var accessory = this;
 
         accessory.client.sensor_humidity(accessory.settings, function (err, data) {
-            callback(err, data[0].value);
+            (err) ? callback(err, data) : callback(err, data[0].value);
         });
     },
     // Sets the Ambi Climate Mode based on a switch.  If the device is being
@@ -51,10 +50,12 @@ AmbiClimate.prototype = {
         var accessory = this;
 
         if (accessory.state.on) {
+            this.log("Putting into comfort mode");
             accessory.client.comfort(accessory.settings, function (err,data) {
                 callback(err);
             });
         } else {
+            this.log("Turning off");
             accessory.client.off(accessory.settings, function (err,data) {
                 callback(err);
             });
