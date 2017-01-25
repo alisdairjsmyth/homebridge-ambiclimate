@@ -1,5 +1,6 @@
 # homebridge-ambiclimate
-[![npm version](https://badge.fury.io/js/homebridge-ambiclimate.svg)](https://badge.fury.io/js/homebridge-ambiclimate)
+[![NPM Version](https://img.shields.io/npm/v/homebridge-ambiclimate.svg)](https://www.npmjs.com/package/homebridge-ambiclimate)
+[![Dependency Status](https://img.shields.io/versioneye/d/nodejs/homebridge-ambiclimate.svg)](https://www.versioneye.com/nodejs/homebridge-ambiclimate/)
 
 [Ambi Climate](https://www.ambiclimate.com/) plugin for [homebridge](https://www.npmjs.com/package/homebridge).  This plugin presently supports:
 * Current Temperature (implementation of Temperature Sensor Service)
