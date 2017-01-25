@@ -33,7 +33,7 @@ function AmbiClimate(log, config) {
 AmbiClimate.prototype = {
     getCurrentTemperature: function(callback) {
         var accessory = this;
-
+        console.log("Temperature - settings: "+JSON.stringify(accessory.settings));
         accessory.client.sensor_temperature(accessory.settings, function (err, data) {
             console.log("Temperature - typeof data: "+(typeof data));
             console.log("Temperature - isArray: "+(data.isArray))
@@ -44,7 +44,7 @@ AmbiClimate.prototype = {
     },
     getCurrentRelativeHumidity: function(callback) {
         var accessory = this;
-
+        console.log("Humidity - settings: "+JSON.stringify(accessory.settings));
         accessory.client.sensor_humidity(accessory.settings, function (err, data) {
             console.log("Humidity - typeof data: "+(typeof data));
             console.log("Humidity - isArray: "+(data.isArray))
