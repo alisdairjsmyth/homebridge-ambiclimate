@@ -8,11 +8,14 @@ module.exports = function(homebridge) {
 }
 
 function AmbiClimate(log, config) {
-    this.log                = log;
-    this.name               = config.name;
-    this.roomName           = config.roomName;
-    this.locationName       = config.locationName;
-    this.bearerToken        = config.bearerToken;
+    this.log           = log;
+    this.name          = config.name;
+    this.settings      = {
+        room_name: config.roomName,
+        location_name: config.locationName
+    };
+
+    this.client = new ambi(config.clientId, config.clientSecret, config.username, config.password);
 
     // Object to maintain the state of the device.  This is done as there is
     // not official API to get this information.  If the Ambi Climate state is
@@ -31,34 +34,14 @@ AmbiClimate.prototype = {
     getCurrentTemperature: function(callback) {
         var accessory = this;
 
-        var ac = require('node-ambiclimate');
-        var client;
-
-        client = new ac({ bearerToken: accessory.bearerToken});
-
-        var settings = {
-            room_name: accessory.roomName,
-            location_name: accessory.locationName
-        };
-
-        client.sensor_temperature(settings, function (err, data) {
+        accessory.client.sensor_temperature(accessory.settings, function (err, data) {
             callback(err, data[0].value);
         });
     },
     getCurrentRelativeHumidity: function(callback) {
         var accessory = this;
 
-        var ac = require('node-ambiclimate');
-        var client;
-
-        client = new ac({ bearerToken: accessory.bearerToken});
-
-        var settings = {
-            room_name: accessory.roomName,
-            location_name: accessory.locationName
-        };
-
-        client.sensor_humidity(settings, function (err, data) {
+        accessory.client.sensor_humidity(accessory.settings, function (err, data) {
             callback(err, data[0].value);
         });
     },
@@ -67,22 +50,12 @@ AmbiClimate.prototype = {
     setMode: function(callback) {
         var accessory = this;
 
-        var ac = require('node-ambiclimate');
-        var client;
-
-        client = new ac({ bearerToken: accessory.bearerToken});
-
-        var settings = {
-            room_name: accessory.roomName,
-            location_name: accessory.locationName
-        };
-
         if (accessory.state.on) {
-            client.comfort(settings, function (err,data) {
+            accessory.client.comfort(accessory.settings, function (err,data) {
                 callback(err);
             });
         } else {
-            client.off(settings, function (err,data) {
+            accessory.client.off(accessory.settings, function (err,data) {
                 callback(err);
             });
         }
