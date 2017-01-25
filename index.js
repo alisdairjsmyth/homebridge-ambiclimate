@@ -13,6 +13,7 @@ function AmbiClimate(log, config) {
     this.settings               = {};
     this.settings.room_name     = config.roomName,
     this.settings.location_name = config.locationName;
+    console.log("Constructor - settings: "+JSON.stringify(this.settings));
 
     this.client = new ambi(config.clientId, config.clientSecret, config.username, config.password);
 
