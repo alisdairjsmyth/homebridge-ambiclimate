@@ -48,7 +48,7 @@ AmbiClimate.prototype = {
         accessory.client.sensor_humidity(accessory.settings, function (err, data) {
             console.log("Humidity - typeof data: "+(typeof data));
             console.log("Humidity - isArray: "+(data.isArray))
-            console.log("Humidity - data: " +JSON.stringify(data);
+            console.log("Humidity - data: " +JSON.stringify(data));
             callback(err, 0);
 //            callback(err, data[0].value);
         });
