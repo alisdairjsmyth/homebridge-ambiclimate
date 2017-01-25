@@ -50,10 +50,12 @@ AmbiClimate.prototype = {
         var accessory = this;
 
         if (accessory.state.on) {
+            this.log("Putting into comfort mode");
             accessory.client.comfort(accessory.settings, function (err,data) {
                 callback(err);
             });
         } else {
+            this.log("Turning off");
             accessory.client.off(accessory.settings, function (err,data) {
                 callback(err);
             });
