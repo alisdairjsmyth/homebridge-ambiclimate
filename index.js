@@ -13,7 +13,6 @@ function AmbiClimate(log, config) {
     this.settings               = {};
     this.settings.room_name     = config.roomName,
     this.settings.location_name = config.locationName;
-    console.log("Constructor - settings: "+JSON.stringify(this.settings));
 
     this.client = new ambi(config.clientId, config.clientSecret, config.username, config.password);
 
@@ -33,24 +32,16 @@ function AmbiClimate(log, config) {
 AmbiClimate.prototype = {
     getCurrentTemperature: function(callback) {
         var accessory = this;
-        console.log("Temperature - settings: "+JSON.stringify(accessory.settings));
+
         accessory.client.sensor_temperature(accessory.settings, function (err, data) {
-            console.log("Temperature - typeof data: "+(typeof data));
-            console.log("Temperature - isArray: "+(data.isArray))
-            console.log("Temperature - data: " +JSON.stringify(data));
-            callback(err, 0);
-//            callback(err, data[0].value);
+            (err) ? callback(err, data) : callback(err, data[0].value);
         });
     },
     getCurrentRelativeHumidity: function(callback) {
         var accessory = this;
-        console.log("Humidity - settings: "+JSON.stringify(accessory.settings));
+
         accessory.client.sensor_humidity(accessory.settings, function (err, data) {
-            console.log("Humidity - typeof data: "+(typeof data));
-            console.log("Humidity - isArray: "+(data.isArray))
-            console.log("Humidity - data: " +JSON.stringify(data));
-            callback(err, 0);
-//            callback(err, data[0].value);
+            (err) ? callback(err, data) : callback(err, data[0].value);
         });
     },
     // Sets the Ambi Climate Mode based on a switch.  If the device is being
