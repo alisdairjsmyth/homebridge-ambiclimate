@@ -35,8 +35,8 @@ AmbiClimate.prototype = {
         var accessory = this;
 
         accessory.client.sensor_temperature(accessory.settings, function (err, data) {
-            this.log("Temperature - typeof data: "+(typeof data));
-            this.log("Temperature - data: " +data);
+            console.log("Temperature - typeof data: "+(typeof data));
+            console.log("Temperature - data: " +data);
             callback(err, 0);
 //            callback(err, data[0].value);
         });
@@ -45,8 +45,8 @@ AmbiClimate.prototype = {
         var accessory = this;
 
         accessory.client.sensor_humidity(accessory.settings, function (err, data) {
-            this.log("Humidity - typeof data: "+(typeof data));
-            this.log("Humidity - data: " +data);
+            console.log("Humidity - typeof data: "+(typeof data));
+            console.log("Humidity - data: " +data);
             callback(err, 0);
 //            callback(err, data[0].value);
         });
