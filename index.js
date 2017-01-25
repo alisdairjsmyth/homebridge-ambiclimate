@@ -35,14 +35,20 @@ AmbiClimate.prototype = {
         var accessory = this;
 
         accessory.client.sensor_temperature(accessory.settings, function (err, data) {
-            callback(err, data[0].value);
+            this.log("Temperature - typeof data: "+(typeof data));
+            this.log("Temperature - data: " +data);
+            callback(err, 0);
+//            callback(err, data[0].value);
         });
     },
     getCurrentRelativeHumidity: function(callback) {
         var accessory = this;
 
         accessory.client.sensor_humidity(accessory.settings, function (err, data) {
-            callback(err, data[0].value);
+            this.log("Humidity - typeof data: "+(typeof data));
+            this.log("Humidity - data: " +data);
+            callback(err, 0);
+//            callback(err, data[0].value);
         });
     },
     // Sets the Ambi Climate Mode based on a switch.  If the device is being
