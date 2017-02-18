@@ -5,7 +5,7 @@
 [Ambi Climate](https://www.ambiclimate.com/) plugin for [homebridge](https://www.npmjs.com/package/homebridge).  This plugin presently supports:
 * Current Temperature (implementation of Temperature Sensor Service)
 * Current Relative Humidity (Implementation of Humidity Sensor Service)
-* Turn On/Off (Implementation of Switch) - turning a device on, puts into Comfort mode
+* Turn On/Off (Implementation of Switch) - where "off" and "on" modes are configurable
 
 as such each physical device appears within HomeKit Apps as three logical devices with the same name.
 
@@ -30,7 +30,10 @@ Update your homebridge configuration file (as below).
             "clientId": "<Ambi Climate OAuth Client Id>",
             "clientSecret": "<Ambi Climate OAuth Client Secret>",
             "username": "<Ambi Climate Username>",
-            "password": "<Ambi Climate Password>"
+            "password": "<Ambi Climate Password>",
+            "onMode": "Comfort",
+            "offMode": "Away_Temperature_Upper",
+            "offValue": 25
         }
     ]
 
@@ -43,6 +46,10 @@ Separate homebridge accessories can be defined for each Ambi Climate device to b
 * `clientSecret`: The Client Secret value for the OAUTH Client obtained from Ambi Dev Portal
 * `username`: Your Ambi Climate username
 * `password`: Your Ambi Climate password
+* `onMode`: (Optional) The mode to put Ambi Climate into when turning it on - defaults to Comfort
+* `onValue`: (Optional) Value associated with the on mode
+* `offMode`: (Optional) The mode to put Ambi Climate into when turning it offMode - defaults to Off
+* `offValue`: (Optional) Value associated with the off mode
 
 ## To Do
 * Refactor to a Platform plugin.  This is predicated on Ambi Labs exposing a capability in their public API to retrieve all devices installed in a given location.
