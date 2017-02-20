@@ -51,6 +51,14 @@ Separate homebridge accessories can be defined for each Ambi Climate device to b
 * `offMode`: (Optional) The mode to put Ambi Climate into when turning it offMode - defaults to Off
 * `offValue`: (Optional) Value associated with the off mode
 
+The following values are supported for `onMode` and `offMode`:
+* `Comfort`
+* `Off`
+* `Away_Temperature_Upper`
+* `Away_Temperature_Lower`
+* `Away_Humidity_Upper`
+* `Temperature`
+
 ## To Do
 * Refactor to a Platform plugin.  This is predicated on Ambi Labs exposing a capability in their public API to retrieve all devices installed in a given location.
 * Implement Thermostat Service (rather than Temperature Sensor).  This is predicated on Ambi Labs exposing a capability in their public API to get current state for each device.
