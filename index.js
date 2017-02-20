@@ -37,11 +37,11 @@ function AmbiClimate(log, config) {
     this.settings.room_name     = config.roomName,
     this.settings.location_name = config.locationName;
     this.on                     = {};
-    this.on.mode                = (typeof config.onMode != "undefined") : config.onMode ? "Default";
-    this.on.value               = (typeof config.onValue != "undefined") : config.onValue ? 0;
+    this.on.mode                = (typeof config.onMode != "undefined") ? config.onMode : "Default";
+    this.on.value               = (typeof config.onValue != "undefined") ? config.onValue : 0;
     this.off                    = {};
-    this.off.mode               = (typeof config.offMode != "undefined") : config.offMode ? "Default";
-    this.off.value              = (typeof config.offValue != "undefined") : config.offValue ? 0;
+    this.off.mode               = (typeof config.offMode != "undefined") ? config.offMode : "Default";
+    this.off.value              = (typeof config.offValue != "undefined") ? config.offValue : 0;
 
     this.client = new ambi(config.clientId, config.clientSecret, config.username, config.password);
 
