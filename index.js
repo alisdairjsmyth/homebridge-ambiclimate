@@ -37,11 +37,11 @@ function AmbiClimate(log, config) {
     this.settings.room_name     = config.roomName,
     this.settings.location_name = config.locationName;
     this.on                     = {};
-    this.on.mode                = (typeof config.onMode) != "undefined" : config.onMode ? "Default";
-    this.on.value               = (typeof config.onValue) != "undefined" : config.onValue ? 0;
+    this.on.mode                = (typeof config.onMode != "undefined") : config.onMode ? "Default";
+    this.on.value               = (typeof config.onValue != "undefined") : config.onValue ? 0;
     this.off                    = {};
-    this.off.mode               = (typeof config.offMode) != "undefined" : config.offMode ? "Default";
-    this.off.value              = (typeof config.offValue) != "undefined" : config.offValue ? 0;
+    this.off.mode               = (typeof config.offMode != "undefined") : config.offMode ? "Default";
+    this.off.value              = (typeof config.offValue != "undefined") : config.offValue ? 0;
 
     this.client = new ambi(config.clientId, config.clientSecret, config.username, config.password);
 
@@ -81,40 +81,40 @@ AmbiClimate.prototype = {
         function setAmbiMode (state) {
           switch (state.mode) {
             case "Comfort":
-              this.log("Putting into comfort mode");
+              accessory.log("Putting into comfort mode");
               accessory.client.comfort(settings, function (err,data) {
                   callback(err);
               });
               break;
             case "Off":
-              this.log("Turning off");
+              accessory.log("Turning off");
               accessory.client.off(settings, function (err,data) {
                   callback(err);
               });
               break;
             case "Away_Temperature_Upper":
-              this.log("Putting into away temperature upper mode");
+              accessory.log("Putting into away temperature upper mode");
               settings.value = state.value;
               accessory.client.away_temperature_upper(settings, function (err,data) {
                   callback(err);
               });
               break;
             case "Away_Temperature_Lower":
-              this.log("Putting into away temperature lower mode");
+              accessory.log("Putting into away temperature lower mode");
               settings.value = state.value;
               accessory.client.away_temperature_lower(settings, function (err,data) {
                   callback(err);
               });
               break;
             case "Away_Humidity_Upper":
-              this.log("Putting into away humidity upper mode");
+              accessory.log("Putting into away humidity upper mode");
               settings.value = state.value;
               accessory.client.away_humidity_upper(settings, function (err,data) {
                   callback(err);
               });
               break;
             case "Temperature":
-              this.log("Putting into temperature mode");
+              accessory.log("Putting into temperature mode");
               settings.value = state.value;
               accessory.client.temperature(settings, function (err,data) {
                   callback(err);
@@ -122,18 +122,17 @@ AmbiClimate.prototype = {
               break;
             default:
               if (accessory.state.on) {
-                this.log("Putting into comfort mode");
+                accessory.log("Putting into comfort mode");
                 accessory.client.comfort(accessory.settings, function (err,data) {
                     callback(err);
                 });
-                break;
               } else {
-                this.log("Turning off");
+                accessory.log("Turning off");
                 accessory.client.off(accessory.settings, function (err,data) {
                     callback(err);
                 });
-                break;
               }
+              break;
           }
         }
 
