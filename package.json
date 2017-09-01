@@ -1,6 +1,6 @@
 {
   "name": "homebridge-ambiclimate",
-  "version": "1.1.2",
+  "version": "2.1.0",
   "description": "Ambi Climate plugin for Homebridge",
   "author": {
     "name": "Alisdair Smyth",
@@ -22,7 +22,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "node-ambiclimate": "2.0.x"
+    "node-ambiclimate": "2.x"
   },
   "devDependencies": {},
   "homepage": "https://github.com/alisdairjsmyth/homebridge-ambiclimate#readme",
