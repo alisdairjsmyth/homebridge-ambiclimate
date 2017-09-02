@@ -37,10 +37,10 @@ function AmbiClimate(log, config) {
     this.settings.room_name     = config.roomName,
     this.settings.location_name = config.locationName;
     this.on                     = {};
-    this.on.mode                = (typeof config.onMode != "undefined") ? config.onMode : "Default";
+    this.on.mode                = (typeof config.onMode != "undefined") ? config.onMode : "Comfort";
     this.on.value               = (typeof config.onValue != "undefined") ? config.onValue : 0;
     this.off                    = {};
-    this.off.mode               = (typeof config.offMode != "undefined") ? config.offMode : "Default";
+    this.off.mode               = (typeof config.offMode != "undefined") ? config.offMode : "Off";
     this.off.value              = (typeof config.offValue != "undefined") ? config.offValue : 0;
 
     this.client = new ambi(config.clientId, config.clientSecret, config.username, config.password);
@@ -72,6 +72,22 @@ AmbiClimate.prototype = {
         accessory.client.sensor_humidity(accessory.settings, function (err, data) {
             (err) ? callback(err, data) : callback(err, data[0].value);
         });
+    },
+    // Checks whether the current retrieved value is the same as the
+    // Homekit On mode for the device
+    getMode: function(callback) {
+        var accessory = this;
+
+        accessory.client.mode(settings, function (err,data) {
+            if (err) {
+              callback(err);
+            } else {
+              accessory.log("Retrieved mode is " + data.mode);
+              accessory.state.on = (accessory.on.mode == data.mode);
+              accessory.log("Device state is " + accessory.state.on)
+              callback(err, accessory.state.on);
+            }
+        })
     },
     // Sets the Ambi Climate Mode based on a switch.
     setMode: function(callback) {
@@ -164,9 +180,10 @@ AmbiClimate.prototype = {
             }.bind(this));
 
         this.switchService.getCharacteristic(Characteristic.On)
-            // Return value maintained within state machine
             .on('get', function(callback) {
-                callback(null, this.state.on);
+                this.getMode(function(error,data) {
+                    callback(error, data);
+                }.bind(this));
             }.bind(this))
             .on('set', function(value, callback) {
                 this.state.on = value;
