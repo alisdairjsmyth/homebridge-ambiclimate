@@ -78,13 +78,13 @@ AmbiClimate.prototype = {
     getMode: function(callback) {
         var accessory = this;
 
-        accessory.client.mode(settings, function (err,data) {
+        accessory.client.mode(accessory.settings, function (err,data) {
             if (err) {
               callback(err);
             } else {
               accessory.log("Retrieved mode is " + data.mode);
               accessory.state.on = (accessory.on.mode == data.mode);
-              accessory.log("Device state is " + accessory.state.on)
+              accessory.log("Device state is " + accessory.state.on);
               callback(err, accessory.state.on);
             }
         })
