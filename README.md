@@ -9,6 +9,8 @@
 
 as such each physical device appears within HomeKit Apps as three logical devices with the same name.
 
+A separate plugin for Ambi Climate is available - [homebridge-ambiclimate-thermostat](https://www.npmjs.com/package/homebridge-ambiclimate-thermostat) exposes Ambi Climate devices as a Thermostat services within Homekit.
+
 ## Installation
 
     npm install -g homebridge-ambiclimate
@@ -61,5 +63,4 @@ The following values are supported for `onMode` and `offMode`:
 
 ## To Do
 * Refactor to a Platform plugin.  This is predicated on Ambi Labs exposing a capability in their public API to retrieve all devices installed in a given location.
-* Implement Thermostat Service (rather than Temperature Sensor).  This is predicated on Ambi Labs exposing a capability in their public API to get current state for each device.
 * Implement Fan Service. This is predicaed on Ambi Labs exposing a capability in their public API to get and set fan state.
