@@ -55,6 +55,7 @@ function AmbiClimate(log, config) {
     this.temperatureService = new Service.TemperatureSensor(this.name);
     this.humidityService    = new Service.HumiditySensor(this.name);
     this.switchService      = new Service.Switch(this.name);
+    this.fanService         = new Service.fanv2(this.name);
     this.informationService = new Service.AccessoryInformation();
 }
 
@@ -158,6 +159,15 @@ AmbiClimate.prototype = {
           setAmbiMode(accessory.off)
         }
     },
+    getActive: function(callback) {
+      callback(null, Characteristic.Active.INACTIVE)
+    },
+    getRotationSpeed: function(callback) {
+      callback(null, 0);
+    },
+    getSwingMode: function(callback) {
+      callback(null, Characteristic.SwingMode.SWING_DISABLED)
+    },
 
     //
     // Services
@@ -191,6 +201,27 @@ AmbiClimate.prototype = {
                     callback(error);
                 }.bind(this));
             }.bind(this));
+
+        this.fanService.getCharacteristic(Characteristic.Active)
+          .on('get', function(callback) {
+            this.getActive(function(error,data) {
+              callback(error, data);
+            }.bind(this))
+          }.bind(this))
+
+        this.fanService.getCharacteristic(Characteristic.RotationSpeed)
+          .on('get', function(callback) {
+            this.getRotationSpeed(function(error,data) {
+              callback(error, data);
+            }.bind(this))
+          }.bind(this))
+
+        this.fanService.getCharacteristic(Characteristic.RotationSpeed)
+          .on('get', function(callback) {
+            this.getRotationSpeed(function(error,data) {
+              callback(error,data);
+            }.bind(this))
+          }.bind(this))
 
  		this.informationService
 			.setCharacteristic(Characteristic.Manufacturer, "Ambi Labs")
