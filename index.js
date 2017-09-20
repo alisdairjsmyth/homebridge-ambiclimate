@@ -175,10 +175,47 @@ AmbiClimate.prototype = {
       .catch( (reason) => {
         callback(reason);
       })
-    callback(null, Characteristic.Active.INACTIVE)
   },
   getRotationSpeed: function(callback) {
-    callback(null, 0);
+    this.client.mode(this.settings)
+      .then( (data) => {
+        switch (data.mode) {
+          case "Off":
+          case "Manual":
+            this.client.appliance_states(this.settings)
+              .then( (data) => {
+                var rotationSpeed;
+                switch (data.data[0].fan) {
+                  case "High":
+                    rotationSpeed = 100;
+                    break;
+                  case "Med-High":
+                    rotationSpeed = 75;
+                    break;
+                  case "Auto":
+                  case "Med":
+                    rotationSpeed = 50;
+                    break;
+                  case "Quiet":
+                  case "Med-Low":
+                    rotationSpeed = 25;
+                    break;
+                  case "Low":
+                  default:
+                    rotationSpeed = 0;
+                    break;
+                }
+                callback(null, rotationSpeed);
+              })
+            break;
+          default:
+            callback(null, 0);
+            break;
+        }
+      })
+      .catch( (reason) => {
+        callback(reason);
+      })
   },
   getSwingMode: function(callback) {
     callback(null, Characteristic.SwingMode.SWING_DISABLED)
