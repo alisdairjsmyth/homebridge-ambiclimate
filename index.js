@@ -160,6 +160,21 @@ AmbiClimate.prototype = {
     }
   },
   getActive: function(callback) {
+    this.client.mode(this.settings)
+      .then( (data) => {
+        switch (data.mode) {
+          case "Off":
+          case "Manual":
+            callback(null, Characteristic.Active.INACTIVE);
+            break;
+          default:
+            callback(null, Characteristic.Active.ACTIVE);
+            break;
+        }
+      })
+      .catch( (reason) => {
+        callback(reason);
+      })
     callback(null, Characteristic.Active.INACTIVE)
   },
   getRotationSpeed: function(callback) {
