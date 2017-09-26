@@ -5,9 +5,10 @@
 [Ambi Climate](https://www.ambiclimate.com/) plugin for [homebridge](https://www.npmjs.com/package/homebridge).  This plugin presently supports:
 * Current Temperature (implementation of Temperature Sensor Service)
 * Current Relative Humidity (Implementation of Humidity Sensor Service)
+* Current Fan state (Implementation of Fan V2 Service)
 * Turn On/Off (Implementation of Switch) - where "off" and "on" modes are configurable
 
-as such each physical device appears within HomeKit Apps as three logical devices with the same name.
+as such each physical device appears within HomeKit Apps as four logical devices with the same name.
 
 A separate plugin for Ambi Climate is available - [homebridge-ambiclimate-thermostat](https://www.npmjs.com/package/homebridge-ambiclimate-thermostat) exposes Ambi Climate devices as a Thermostat services within Homekit.
 
@@ -63,4 +64,4 @@ The following values are supported for `onMode` and `offMode`:
 
 ## To Do
 * Refactor to a Platform plugin.  This is predicated on Ambi Labs exposing a capability in their public API to retrieve all devices installed in a given location.
-* Implement Fan Service. This is predicaed on Ambi Labs exposing a capability in their public API to get and set fan state.
+* Implement Fan Service set capabilities. This is predicated on Ambi Labs exposing a capability in their public API to set fan state.
