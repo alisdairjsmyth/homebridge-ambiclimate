@@ -300,9 +300,9 @@ AmbiClimate.prototype = {
         }.bind(this))
       }.bind(this))
 
-    this.fanService.getCharacteristic(Characteristic.RotationSpeed)
+    this.fanService.getCharacteristic(Characteristic.SwingMode)
       .on('get', function(callback) {
-        this.getRotationSpeed(function(error,data) {
+        this.getSwingMode(function(error,data) {
           callback(error,data);
         }.bind(this))
       }.bind(this))
