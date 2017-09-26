@@ -176,12 +176,19 @@ AmbiClimate.prototype = {
         callback(reason);
       })
   },
+  // The states returned by appliance_states do not reflect the current state
+  // of the air conditioner if it is off.  As a consequence we first check the
+  // Ambi Climate mode, and only retrieve appliance states when the mode is
+  // neither Off or Manual.
   getRotationSpeed: function(callback) {
     this.client.mode(this.settings)
       .then( (data) => {
         switch (data.mode) {
           case "Off":
           case "Manual":
+            callback(null, 0);
+            break;
+          default:
             this.client.appliance_states(this.settings)
               .then( (data) => {
                 var rotationSpeed;
@@ -208,17 +215,42 @@ AmbiClimate.prototype = {
                 callback(null, rotationSpeed);
               })
             break;
-          default:
-            callback(null, 0);
-            break;
         }
       })
       .catch( (reason) => {
         callback(reason);
       })
   },
+  // As per logic in getRotationSpeed, only retrieve appliance states if the
+  // Ambi Climate mode is neither Off or Manual.
   getSwingMode: function(callback) {
-    callback(null, Characteristic.SwingMode.SWING_DISABLED)
+    this.client.mode(this.settings)
+      .then( (data) => {
+        switch (data.mode) {
+          case "Off":
+          case "Manual":
+            callback(null, Characteristic.SwingMode.SWING_DISABLED)
+            break;
+          default:
+            this.client.appliance_states(this.settings)
+              .then( (data) => {
+                var rotationSpeed;
+                switch (data.data[0].swing) {
+                  case "Oscillate":
+                    callback(null, Characteristic.SwingMode.SWING_ENABLED)
+                    break;
+                  case "Off":
+                  default:
+                    callback(null, Characteristic.SwingMode.SWING_DISABLED)
+                    break;
+                }
+              })
+            break;
+        }
+      })
+      .catch( (reason) => {
+        callback(reason);
+      })
   },
 
   //
