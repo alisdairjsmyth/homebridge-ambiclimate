@@ -55,7 +55,7 @@ function AmbiClimate(log, config) {
   this.temperatureService = new Service.TemperatureSensor(this.name);
   this.humidityService    = new Service.HumiditySensor(this.name);
   this.switchService      = new Service.Switch(this.name);
-  this.fanService         = new Service.fanv2(this.name);
+  this.fanService         = new Service.Fanv2(this.name);
   this.informationService = new Service.AccessoryInformation();
 }
 
