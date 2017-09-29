@@ -162,6 +162,7 @@ AmbiClimate.prototype = {
   getActive: function(callback) {
     this.client.mode(this.settings)
       .then( (data) => {
+        this.log("getActive: Retrieved mode is "+data.mode);
         switch (data.mode) {
           case "Off":
           case "Manual":
