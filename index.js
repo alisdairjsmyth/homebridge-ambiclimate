@@ -83,9 +83,7 @@ AmbiClimate.prototype = {
       if (err) {
         callback(err);
       } else {
-        accessory.log("Retrieved mode is " + data.mode);
         accessory.state.on = (accessory.on.mode == data.mode);
-        accessory.log("Device state is " + accessory.state.on);
         callback(err, accessory.state.on);
       }
     })
@@ -235,7 +233,6 @@ AmbiClimate.prototype = {
           default:
             this.client.appliance_states(this.settings)
               .then( (data) => {
-                var rotationSpeed;
                 switch (data.data[0].swing) {
                   case "Oscillate":
                     callback(null, Characteristic.SwingMode.SWING_ENABLED)
@@ -291,27 +288,27 @@ AmbiClimate.prototype = {
       .on('get', function(callback) {
         this.getActive(function(error,data) {
           callback(error, data);
-        }.bind(this))
-      }.bind(this))
+        }.bind(this));
+      }.bind(this));
 
     this.fanService.getCharacteristic(Characteristic.RotationSpeed)
       .on('get', function(callback) {
         this.getRotationSpeed(function(error,data) {
           callback(error, data);
-        }.bind(this))
-      }.bind(this))
+        }.bind(this));
+      }.bind(this));
 
     this.fanService.getCharacteristic(Characteristic.SwingMode)
       .on('get', function(callback) {
         this.getSwingMode(function(error,data) {
           callback(error,data);
-        }.bind(this))
-      }.bind(this))
+        }.bind(this));
+      }.bind(this));
 
-		this.informationService
-		.setCharacteristic(Characteristic.Manufacturer, "Ambi Labs")
-		.setCharacteristic(Characteristic.Model, "Ambi Climate")
-		.setCharacteristic(Characteristic.SerialNumber, " ");
+    this.informationService
+      .setCharacteristic(Characteristic.Manufacturer, "Ambi Labs")
+      .setCharacteristic(Characteristic.Model, "Ambi Climate")
+      .setCharacteristic(Characteristic.SerialNumber, " ");
 
     return [this.temperatureService,this.humidityService,this.switchService,this.fanService,this.informationService];
   }
