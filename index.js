@@ -55,7 +55,7 @@ function AmbiClimate(log, config) {
   this.temperatureService = new Service.TemperatureSensor(this.name);
   this.humidityService    = new Service.HumiditySensor(this.name);
   this.switchService      = new Service.Switch(this.name);
-  this.fanService         = new Service.Fanv2(this.name);
+  this.fanService         = new Service.Fan(this.name);
   this.informationService = new Service.AccessoryInformation();
 }
 
@@ -204,44 +204,16 @@ AmbiClimate.prototype = {
                     break;
                   case "Quiet":
                   case "Med-Low":
-                    rotationSpeed = 25;
+                    rotationSpeed = 38;
                     break;
                   case "Low":
+                    rotationSpeed = 25;
+                    break;
                   default:
                     rotationSpeed = 0;
                     break;
                 }
                 callback(null, rotationSpeed);
-              })
-            break;
-        }
-      })
-      .catch( (reason) => {
-        callback(reason);
-      })
-  },
-  // As per logic in getRotationSpeed, only retrieve appliance states if the
-  // Ambi Climate mode is neither Off or Manual.
-  getSwingMode: function(callback) {
-    this.client.mode(this.settings)
-      .then( (data) => {
-        switch (data.mode) {
-          case "Off":
-          case "Manual":
-            callback(null, Characteristic.SwingMode.SWING_DISABLED)
-            break;
-          default:
-            this.client.appliance_states(this.settings)
-              .then( (data) => {
-                switch (data.data[0].swing) {
-                  case "Oscillate":
-                    callback(null, Characteristic.SwingMode.SWING_ENABLED)
-                    break;
-                  case "Off":
-                  default:
-                    callback(null, Characteristic.SwingMode.SWING_DISABLED)
-                    break;
-                }
               })
             break;
         }
@@ -284,7 +256,7 @@ AmbiClimate.prototype = {
         }.bind(this));
       }.bind(this));
 
-    this.fanService.getCharacteristic(Characteristic.Active)
+    this.fanService.getCharacteristic(Characteristic.On)
       .on('get', function(callback) {
         this.getActive(function(error,data) {
           callback(error, data);
@@ -295,13 +267,6 @@ AmbiClimate.prototype = {
       .on('get', function(callback) {
         this.getRotationSpeed(function(error,data) {
           callback(error, data);
-        }.bind(this));
-      }.bind(this));
-
-    this.fanService.getCharacteristic(Characteristic.SwingMode)
-      .on('get', function(callback) {
-        this.getSwingMode(function(error,data) {
-          callback(error,data);
         }.bind(this));
       }.bind(this));
 
