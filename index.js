@@ -53,17 +53,16 @@ function AmbiClimatePlatform(log, config, api) {
         accessory.addService(Service.Fan, accessory.settings.room_name)
           .getCharacteristic(Characteristic.On)
           .on('get', function (callback) {
-             this.getActive(function (error, data) {
-               callback(error, data);
-             }.bind(this));
-           }.bind(this));
+            this.getActive(function (error, data) {
+              callback(error, data);
+            }.bind(this));
+          }.bind(this));
 
         accessory.getService(Service.AccessoryInformation)
           .setCharacteristic(Characteristic.Manufacturer, "Ambi Labs")
           .setCharacteristic(Characteristic.Model, "Ambi Climate")
           .setCharacteristic(Characteristic.SerialNumber, device.device_id);
 
-        this.accessories.push(accessory);
         this.api.registerPlatformAccessories("homebridge-ambiclimate", "AmbiClimate", [accessory]);
       }
     });
